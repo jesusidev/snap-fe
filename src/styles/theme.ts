@@ -6,10 +6,11 @@ import cardStyles from './Card.module.css';
 import textStyles from './Text.module.css';
 
 export const theme = createTheme({
-  colors: color,
+  colors: {
+    brand: color.brand,
+  },
   primaryColor: 'brand',
   primaryShade: 5,
-  black,
   fontFamily: "'Inter', system-ui, sans-serif",
   headings: {
     fontFamily: "'Inter', system-ui, sans-serif",

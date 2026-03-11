@@ -6,6 +6,7 @@ interface ShowNotificationPayload {
   message: string;
   type: 'success' | 'error' | 'info' | 'warning';
   duration?: number;
+  persistent?: boolean;
 }
 
 /**

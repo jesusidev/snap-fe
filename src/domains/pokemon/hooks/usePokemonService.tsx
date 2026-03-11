@@ -53,9 +53,41 @@ export function usePokemonService() {
     return { search };
   }
 
+  /**
+   * Prefetch the Pokemon list into the TanStack Query cache.
+   * Call on hover (e.g. "Explore the Pokedex" button) so the list page loads instantly.
+   */
+  function usePrefetchList() {
+    const utils = api.useUtils();
+
+    return (params?: { limit?: number; offset?: number }) => {
+      void utils.pokemon.list.prefetch(
+        { limit: params?.limit ?? 20, offset: params?.offset ?? 0 },
+        { staleTime: 1000 * 60 * 10 }
+      );
+    };
+  }
+
+  /**
+   * Prefetch a Pokemon by name into the TanStack Query cache.
+   * Call on hover so the detail page loads instantly on click.
+   */
+  function usePrefetchByName() {
+    const utils = api.useUtils();
+
+    return (name: string) => {
+      void utils.pokemon.byName.prefetch(
+        { name },
+        { staleTime: 1000 * 60 * 30 }
+      );
+    };
+  }
+
   return {
     useList,
     useByName,
     useSearch,
+    usePrefetchList,
+    usePrefetchByName,
   };
 }

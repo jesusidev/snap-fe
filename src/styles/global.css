@@ -6,11 +6,33 @@
 
 body {
   margin: 0;
-  background-color: var(--mantine-color-dark-7);
-  color: var(--mantine-color-dark-0);
+  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
+  color: light-dark(var(--mantine-color-dark-9), var(--mantine-color-dark-0));
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* Lenis Smooth Scrolling */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }

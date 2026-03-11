@@ -1,9 +1,14 @@
 'use client';
 
-import { Badge, Card as MantineCard, Group, Text } from '@mantine/core';
+import { ActionIcon, Badge, Card as MantineCard, Group, Text, Tooltip } from '@mantine/core';
+import { IconHeart, IconHeartFilled } from '@tabler/icons-react';
 import Image from 'next/image';
-import { ViewTransition } from 'react';
+import { useState, ViewTransition } from 'react';
+import { useNotificationDispatcher } from '~/events';
+import { usePokemonService } from '~/domains/pokemon/hooks';
+import { useStorePendingAction } from '~/shared/hooks';
 import { NavLink } from '~/shared/components/NavigationLoader';
+import { useTrainer } from '~/state/trainer';
 import { useViewTransition } from '~/state';
 import { mergeclasses } from '~/utils';
 import classes from './PokemonCard.module.css';
@@ -97,15 +102,61 @@ function CardTypes() {
   );
 }
 
+function CardFavorite() {
+  const { id, name } = usePokemonCard();
+  const { trainerName } = useTrainer();
+  const { store } = useStorePendingAction();
+  const notificationDispatcher = useNotificationDispatcher();
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleFavorite = () => {
+    if (isFavorite) {
+      setIsFavorite(false);
+      notificationDispatcher.show({
+        message: `${name} removed from favorites`,
+        type: 'info',
+      });
+      return;
+    }
+
+    // If no trainer name, defer the action
+    const deferred = store('favorite', id, name);
+    if (deferred) return;
+
+    // Precondition met -- execute immediately
+    setIsFavorite(true);
+    notificationDispatcher.show({
+      message: `${name} added to favorites!`,
+      type: 'success',
+    });
+  };
+
+  return (
+    <Tooltip label={trainerName ? (isFavorite ? 'Unfavorite' : 'Favorite') : 'Set trainer name to favorite'}>
+      <ActionIcon
+        variant="subtle"
+        color={isFavorite ? 'red' : 'gray'}
+        onClick={handleFavorite}
+        aria-label={isFavorite ? `Unfavorite ${name}` : `Favorite ${name}`}
+      >
+        {isFavorite ? <IconHeartFilled size={18} /> : <IconHeart size={18} />}
+      </ActionIcon>
+    </Tooltip>
+  );
+}
+
 function CardActions() {
   const { name } = usePokemonCard();
 
   return (
-    <NavLink href={`/pokemon/${name}`} className={classes.detailLink}>
-      <Text size="sm" c="brand" fw={500} ta="center">
-        View Details
-      </Text>
-    </NavLink>
+    <Group justify="space-between" align="center">
+      <NavLink href={`/pokemon/${name}`} className={classes.detailLink}>
+        <Text size="sm" c="brand" fw={500}>
+          View Details
+        </Text>
+      </NavLink>
+      <CardFavorite />
+    </Group>
   );
 }
 
@@ -120,12 +171,16 @@ interface PokemonCardRootProps {
 }
 
 function PokemonCardRoot({ id, name, image, types, children }: PokemonCardRootProps) {
+  const pokemonService = usePokemonService();
+  const prefetch = pokemonService.usePrefetchByName();
+
   return (
     <PokemonCardProvider id={id} name={name} image={image} types={types}>
       <MantineCard
         withBorder
         className={mergeclasses(classes.card)}
         padding="md"
+        onMouseEnter={() => prefetch(name)}
       >
         {children}
       </MantineCard>
@@ -140,5 +195,6 @@ export const PokemonCard = Object.assign(PokemonCardRoot, {
   Name: CardName,
   Id: CardId,
   Types: CardTypes,
+  Favorite: CardFavorite,
   Actions: CardActions,
 });

@@ -11,7 +11,7 @@ import { NotificationContext } from './notification-context';
 export function NotificationProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const handler = (e: Event) => {
-      const { message, type, duration } = (e as CustomEvent).detail;
+      const { message, type, duration, persistent } = (e as CustomEvent).detail;
 
       const colorMap: Record<string, string> = {
         success: 'green',
@@ -23,7 +23,7 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
       notifications.show({
         message,
         color: colorMap[type] ?? 'blue',
-        autoClose: duration ?? 4000,
+        autoClose: persistent ? false : (duration ?? 4000),
       });
     };
 

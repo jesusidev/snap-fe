@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  ActionIcon,
   Badge,
   Button,
   Container,
@@ -12,13 +13,18 @@ import {
   Stack,
   Text,
   Title,
+  Tooltip,
 } from '@mantine/core';
-import { IconArrowLeft } from '@tabler/icons-react';
+import { IconArrowLeft, IconHeart, IconHeartFilled } from '@tabler/icons-react';
 import Image from 'next/image';
-import { useEffect, ViewTransition } from 'react';
+import { useEffect, useState, ViewTransition } from 'react';
+import { useEvent, useNotificationDispatcher } from '~/events';
 import { usePokemonService } from '~/domains/pokemon/hooks';
+import { usePendingAction, useStorePendingAction } from '~/shared/hooks';
+import { storeLastViewed } from '~/shared/utils';
 import LayoutPage from '~/layouts/LayoutPage';
 import { NavLink } from '~/shared/components/NavigationLoader';
+import { useTrainer } from '~/state/trainer';
 import { useViewTransition } from '~/state';
 import classes from './PokemonDetail.module.css';
 
@@ -60,12 +66,46 @@ export function PokemonDetailClient({ name }: PokemonDetailClientProps) {
   const pokemonService = usePokemonService();
   const { data: pokemon, isPending, isError } = pokemonService.useByName(name);
   const { setDestinationItem, setDestinationItemSync } = useViewTransition();
+  const { dispatch: dispatchViewed } = useEvent('pokemon:viewed');
+  const { trainerName } = useTrainer();
+  const { store } = useStorePendingAction();
+  const notificationDispatcher = useNotificationDispatcher();
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  // Execute pending actions (e.g., deferred favorite from card click)
+  usePendingAction(pokemon?.id ?? 0, pokemon?.name, {
+    onFavoriteExecuted: () => setIsFavorite(true),
+  });
 
   useEffect(() => {
     if (pokemon) {
       setDestinationItem(String(pokemon.id));
+      dispatchViewed({ pokemonId: pokemon.id, pokemonName: pokemon.name });
+      storeLastViewed(pokemon.id, pokemon.name);
     }
-  }, [pokemon, setDestinationItem]);
+  }, [pokemon, setDestinationItem, dispatchViewed]);
+
+  const handleFavorite = () => {
+    if (!pokemon) return;
+
+    if (isFavorite) {
+      setIsFavorite(false);
+      notificationDispatcher.show({
+        message: `${pokemon.name} removed from favorites`,
+        type: 'info',
+      });
+      return;
+    }
+
+    const deferred = store('favorite', pokemon.id, pokemon.name);
+    if (deferred) return;
+
+    setIsFavorite(true);
+    notificationDispatcher.show({
+      message: `${pokemon.name} added to favorites!`,
+      type: 'success',
+    });
+  };
 
   if (isPending) {
     return (
@@ -128,7 +168,20 @@ export function PokemonDetailClient({ name }: PokemonDetailClientProps) {
             <Stack gap="md">
               <div>
                 <Text size="sm" c="dimmed">#{String(pokemon.id).padStart(3, '0')}</Text>
-                <Title order={1} tt="capitalize">{pokemon.name}</Title>
+                <Group gap="sm" align="center">
+                  <Title order={1} tt="capitalize">{pokemon.name}</Title>
+                  <Tooltip label={trainerName ? (isFavorite ? 'Unfavorite' : 'Favorite') : 'Set trainer name to favorite'}>
+                    <ActionIcon
+                      variant="subtle"
+                      color={isFavorite ? 'red' : 'gray'}
+                      size="lg"
+                      onClick={handleFavorite}
+                      aria-label={isFavorite ? `Unfavorite ${pokemon.name}` : `Favorite ${pokemon.name}`}
+                    >
+                      {isFavorite ? <IconHeartFilled size={22} /> : <IconHeart size={22} />}
+                    </ActionIcon>
+                  </Tooltip>
+                </Group>
               </div>
 
               {/* Types */}

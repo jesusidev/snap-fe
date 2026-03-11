@@ -1,7 +1,17 @@
 'use client';
 
 import { LoadingOverlay } from '@mantine/core';
-import { createContext, type ReactNode, useCallback, useContext, useMemo, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import {
+  createContext,
+  type ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 interface NavigationLoaderContextValue {
   isNavigating: boolean;
@@ -21,6 +31,17 @@ export function useNavigationLoader() {
 
 export function NavigationLoaderProvider({ children }: { children: ReactNode }) {
   const [isNavigating, setIsNavigating] = useState(false);
+  const pathname = usePathname();
+  const isFirstRender = useRef(true);
+
+  // Stop navigation loader when the route changes
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    setIsNavigating(false);
+  }, [pathname]);
 
   const startNavigation = useCallback(() => setIsNavigating(true), []);
   const stopNavigation = useCallback(() => setIsNavigating(false), []);
