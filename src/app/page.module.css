@@ -1,0 +1,9 @@
+.hero {
+  min-height: 60vh;
+  display: flex;
+  justify-content: center;
+}
+
+.icon {
+  color: var(--mantine-color-brand-5);
+}

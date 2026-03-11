@@ -1,0 +1,1 @@
+export { PokemonDetailClient } from './PokemonDetailClient';

@@ -1,0 +1,6 @@
+/**
+ * Merge class names, filtering out falsy values.
+ */
+export function mergeclasses(...classes: (string | undefined | null | false)[]): string {
+  return classes.filter(Boolean).join(' ');
+}

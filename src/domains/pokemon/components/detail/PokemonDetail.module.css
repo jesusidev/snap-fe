@@ -1,0 +1,13 @@
+.imageCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-7));
+}
+
+.image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+}

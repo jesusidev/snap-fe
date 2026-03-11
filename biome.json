@@ -1,0 +1,68 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.3.14/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": false,
+    "includes": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.json", "**/*.mjs"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "noExcessiveCognitiveComplexity": "warn"
+      },
+      "correctness": {
+        "noConstAssign": "error",
+        "noUndeclaredVariables": "error",
+        "noUnreachable": "error",
+        "useIsNan": "error"
+      },
+      "suspicious": {
+        "noArrayIndexKey": "warn",
+        "noDebugger": "warn",
+        "noExplicitAny": "warn",
+        "noEmptyBlockStatements": "error"
+      },
+      "style": {
+        "useConst": "error",
+        "useSelfClosingElements": "error",
+        "useTemplate": "error",
+        "useFragmentSyntax": "error"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "jsxQuoteStyle": "double",
+      "trailingCommas": "es5",
+      "semicolons": "always",
+      "arrowParentheses": "always"
+    }
+  },
+  "json": {
+    "formatter": {
+      "indentStyle": "space",
+      "indentWidth": 2
+    }
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  }
+}

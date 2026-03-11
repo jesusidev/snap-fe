@@ -1,0 +1,12 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mantine-spacing-md);
+  justify-content: center;
+}
+
+@media (min-width: 48em) {
+  .grid {
+    justify-content: flex-start;
+  }
+}

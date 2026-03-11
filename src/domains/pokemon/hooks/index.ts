@@ -1,0 +1,1 @@
+export { usePokemonService } from './usePokemonService';

@@ -1,0 +1,1 @@
+export { pokemonRouter } from './router';

@@ -1,0 +1,19 @@
+.header {
+  background-color: var(--mantine-color-dark-8);
+  border-bottom: 1px solid var(--mantine-color-dark-4);
+}
+
+.main {
+  min-height: calc(100vh - 60px);
+}
+
+.navLink {
+  text-decoration: none;
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
+  border-radius: var(--mantine-radius-sm);
+  transition: background-color 0.15s ease;
+}
+
+.navLink:hover {
+  background-color: var(--mantine-color-dark-5);
+}

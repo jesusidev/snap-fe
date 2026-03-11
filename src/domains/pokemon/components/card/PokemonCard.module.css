@@ -1,0 +1,53 @@
+.card {
+  width: 220px;
+  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6));
+  border-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--mantine-spacing-xs);
+}
+
+.card:hover {
+  border-color: var(--mantine-color-brand-5);
+}
+
+.imageSection {
+  display: flex;
+  justify-content: center;
+  padding: var(--mantine-spacing-md);
+  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-7));
+  border-radius: var(--mantine-radius-sm);
+  width: 100%;
+}
+
+.image {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.card:hover .image {
+  transform: scale(1.05);
+}
+
+.detailLink {
+  text-decoration: none;
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
+  border-radius: var(--mantine-radius-sm);
+  transition: background-color 0.15s ease;
+  width: 100%;
+  text-align: center;
+}
+
+.detailLink:hover {
+  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5));
+}
+
+/* Responsive: cards fill width on mobile */
+@media (max-width: 36em) {
+  .card {
+    width: 100%;
+  }
+}
