@@ -21,8 +21,12 @@ interface NavigationLoaderContextValue {
 
 const NavigationLoaderContext = createContext<NavigationLoaderContextValue>({
   isNavigating: false,
-  startNavigation: () => {},
-  stopNavigation: () => {},
+  startNavigation: () => {
+    /* noop default */
+  },
+  stopNavigation: () => {
+    /* noop default */
+  },
 });
 
 export function useNavigationLoader() {
@@ -35,6 +39,7 @@ export function NavigationLoaderProvider({ children }: { children: ReactNode }) 
   const isFirstRender = useRef(true);
 
   // Stop navigation loader when the route changes
+  // biome-ignore lint/correctness/useExhaustiveDependencies: pathname change is the trigger
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;

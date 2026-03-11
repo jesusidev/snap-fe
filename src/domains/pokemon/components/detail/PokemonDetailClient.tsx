@@ -18,14 +18,14 @@ import {
 import { IconArrowLeft, IconHeart, IconHeartFilled } from '@tabler/icons-react';
 import Image from 'next/image';
 import { useEffect, useState, ViewTransition } from 'react';
-import { useEvent, useNotificationDispatcher } from '~/events';
 import { usePokemonService } from '~/domains/pokemon/hooks';
-import { usePendingAction, useStorePendingAction } from '~/shared/hooks';
-import { storeLastViewed } from '~/shared/utils';
+import { useEvent, useNotificationDispatcher } from '~/events';
 import LayoutPage from '~/layouts/LayoutPage';
 import { NavLink } from '~/shared/components/NavigationLoader';
-import { useTrainer } from '~/state/trainer';
+import { usePendingAction, useStorePendingAction } from '~/shared/hooks';
+import { storeLastViewed } from '~/shared/utils';
 import { useViewTransition } from '~/state';
+import { useTrainer } from '~/state/trainer';
 import classes from './PokemonDetail.module.css';
 
 const typeColors: Record<string, string> = {
@@ -167,16 +167,30 @@ export function PokemonDetailClient({ name }: PokemonDetailClientProps) {
           <Grid.Col span={{ base: 12, md: 7 }}>
             <Stack gap="md">
               <div>
-                <Text size="sm" c="dimmed">#{String(pokemon.id).padStart(3, '0')}</Text>
+                <Text size="sm" c="dimmed">
+                  #{String(pokemon.id).padStart(3, '0')}
+                </Text>
                 <Group gap="sm" align="center">
-                  <Title order={1} tt="capitalize">{pokemon.name}</Title>
-                  <Tooltip label={trainerName ? (isFavorite ? 'Unfavorite' : 'Favorite') : 'Set trainer name to favorite'}>
+                  <Title order={1} tt="capitalize">
+                    {pokemon.name}
+                  </Title>
+                  <Tooltip
+                    label={
+                      trainerName
+                        ? isFavorite
+                          ? 'Unfavorite'
+                          : 'Favorite'
+                        : 'Set trainer name to favorite'
+                    }
+                  >
                     <ActionIcon
                       variant="subtle"
                       color={isFavorite ? 'red' : 'gray'}
                       size="lg"
                       onClick={handleFavorite}
-                      aria-label={isFavorite ? `Unfavorite ${pokemon.name}` : `Favorite ${pokemon.name}`}
+                      aria-label={
+                        isFavorite ? `Unfavorite ${pokemon.name}` : `Favorite ${pokemon.name}`
+                      }
                     >
                       {isFavorite ? <IconHeartFilled size={22} /> : <IconHeart size={22} />}
                     </ActionIcon>
@@ -202,22 +216,30 @@ export function PokemonDetailClient({ name }: PokemonDetailClientProps) {
               {/* Physical */}
               <Group gap="xl">
                 <div>
-                  <Text size="xs" c="dimmed">Height</Text>
+                  <Text size="xs" c="dimmed">
+                    Height
+                  </Text>
                   <Text fw={600}>{(pokemon.height / 10).toFixed(1)} m</Text>
                 </div>
                 <div>
-                  <Text size="xs" c="dimmed">Weight</Text>
+                  <Text size="xs" c="dimmed">
+                    Weight
+                  </Text>
                   <Text fw={600}>{(pokemon.weight / 10).toFixed(1)} kg</Text>
                 </div>
                 <div>
-                  <Text size="xs" c="dimmed">Base XP</Text>
+                  <Text size="xs" c="dimmed">
+                    Base XP
+                  </Text>
                   <Text fw={600}>{pokemon.baseExperience}</Text>
                 </div>
               </Group>
 
               {/* Stats */}
               <Paper p="md" radius="md" withBorder>
-                <Text fw={600} mb="sm">Base Stats</Text>
+                <Text fw={600} mb="sm">
+                  Base Stats
+                </Text>
                 <Stack gap="xs">
                   {pokemon.stats.map((stat) => (
                     <div key={stat.name}>
@@ -225,7 +247,9 @@ export function PokemonDetailClient({ name }: PokemonDetailClientProps) {
                         <Text size="xs" tt="capitalize" c="dimmed">
                           {stat.name.replace('-', ' ')}
                         </Text>
-                        <Text size="xs" fw={600}>{stat.value}</Text>
+                        <Text size="xs" fw={600}>
+                          {stat.value}
+                        </Text>
                       </Group>
                       <Progress
                         value={(stat.value / 255) * 100}
@@ -240,7 +264,9 @@ export function PokemonDetailClient({ name }: PokemonDetailClientProps) {
 
               {/* Abilities */}
               <Paper p="md" radius="md" withBorder>
-                <Text fw={600} mb="sm">Abilities</Text>
+                <Text fw={600} mb="sm">
+                  Abilities
+                </Text>
                 <Group gap="xs">
                   {pokemon.abilities.map((ability) => (
                     <Badge

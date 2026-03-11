@@ -1,2 +1,2 @@
-export { NavLink } from './NavLink';
 export { NavigationLoaderProvider, useNavigationLoader } from './NavigationLoader';
+export { NavLink } from './NavLink';

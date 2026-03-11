@@ -5,9 +5,9 @@ import { useNotificationDispatcher } from '~/events';
 import {
   clearPendingAction,
   getPendingAction,
-  storePendingAction,
   type PendingAction,
   type PendingActionType,
+  storePendingAction,
 } from '~/shared/utils';
 import { useTrainer } from '~/state/trainer';
 
@@ -50,7 +50,7 @@ interface PendingActionCallbacks {
  */
 export function usePendingAction(
   pokemonId: number,
-  pokemonName?: string,
+  _pokemonName?: string,
   callbacks?: PendingActionCallbacks
 ): void {
   const { trainerName } = useTrainer();

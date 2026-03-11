@@ -33,9 +33,5 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo(() => ({ initialized: true }), []);
 
-  return (
-    <NotificationContext.Provider value={value}>
-      {children}
-    </NotificationContext.Provider>
-  );
+  return <NotificationContext.Provider value={value}>{children}</NotificationContext.Provider>;
 }

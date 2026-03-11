@@ -25,17 +25,14 @@ function ResumeModal() {
   };
 
   return (
-    <Modal
-      opened={!!pokemonName}
-      onClose={handleClose}
-      title="Welcome back!"
-      centered
-    >
+    <Modal opened={!!pokemonName} onClose={handleClose} title="Welcome back!" centered>
       <Stack gap="md">
         <Text size="sm">
           Last time you were checking out{' '}
-          <Text span fw={600} tt="capitalize">{pokemonName}</Text>.
-          Want to pick up where you left off?
+          <Text span fw={600} tt="capitalize">
+            {pokemonName}
+          </Text>
+          . Want to pick up where you left off?
         </Text>
         <Group justify="flex-end" gap="sm">
           <Button variant="default" onClick={handleClose}>
@@ -65,10 +62,12 @@ export default function HomePage() {
         <Stack align="center" gap="xl" className={classes.hero}>
           <IconPokeball size={80} stroke={1.2} className={classes.icon} />
           <div style={{ textAlign: 'center' }}>
-            <Title order={1} size="3rem">Snap</Title>
+            <Title order={1} size="3rem">
+              Snap
+            </Title>
             <Text size="lg" c="dimmed" mt="sm">
-              A minimal Next.js boilerplate with tRPC, Mantine, ViewTransitions,
-              and domain-driven architecture.
+              A minimal Next.js boilerplate with tRPC, Mantine, ViewTransitions, and domain-driven
+              architecture.
             </Text>
           </div>
           <Button

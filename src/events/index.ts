@@ -8,7 +8,4 @@ import type { NotificationEvents } from './notification-events';
 import type { PokemonEvents } from './pokemon-events';
 
 // Combine all domain events into one interface
-export interface CustomWindowEventMap
-  extends WindowEventMap,
-    NotificationEvents,
-    PokemonEvents {}
+export interface CustomWindowEventMap extends WindowEventMap, NotificationEvents, PokemonEvents {}

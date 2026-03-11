@@ -1,6 +1,6 @@
-import { Button, Card, Text, createTheme } from '@mantine/core';
+import { Button, Card, createTheme, Text } from '@mantine/core';
 import { breakpoints } from '~/styles/breakpoints';
-import { black, color } from '~/styles/colors';
+import { color } from '~/styles/colors';
 import buttonStyles from './Button.module.css';
 import cardStyles from './Card.module.css';
 import textStyles from './Text.module.css';

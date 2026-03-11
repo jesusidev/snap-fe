@@ -13,8 +13,8 @@ import {
 } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 import { useEffect, useMemo, useState } from 'react';
-import { useEvent, useNotificationDispatcher } from '~/events';
 import { usePokemonService } from '~/domains/pokemon/hooks';
+import { useEvent, useNotificationDispatcher } from '~/events';
 import LayoutPage from '~/layouts/LayoutPage';
 import { PokemonCardComposed } from '../card';
 import classes from './PokemonList.module.css';
@@ -111,10 +111,13 @@ export function PokemonList() {
           {/* Live region for screen reader announcements */}
           <output aria-live="polite" aria-atomic="true" className={classes.srOnly}>
             {isPending && 'Loading Pokemon...'}
-            {!isPending && filteredPokemon.length > 0
-              && `Showing ${filteredPokemon.length} Pokemon`}
-            {!isPending && filteredPokemon.length === 0 && searchQuery.trim()
-              && `No Pokemon found matching "${searchQuery}"`}
+            {!isPending &&
+              filteredPokemon.length > 0 &&
+              `Showing ${filteredPokemon.length} Pokemon`}
+            {!isPending &&
+              filteredPokemon.length === 0 &&
+              searchQuery.trim() &&
+              `No Pokemon found matching "${searchQuery}"`}
           </output>
 
           {isError && (

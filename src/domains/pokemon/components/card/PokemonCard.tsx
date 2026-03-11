@@ -1,15 +1,15 @@
 'use client';
 
-import { ActionIcon, Badge, Card as MantineCard, Group, Text, Tooltip } from '@mantine/core';
+import { ActionIcon, Badge, Group, Card as MantineCard, Text, Tooltip } from '@mantine/core';
 import { IconHeart, IconHeartFilled } from '@tabler/icons-react';
 import Image from 'next/image';
 import { useState, ViewTransition } from 'react';
-import { useNotificationDispatcher } from '~/events';
 import { usePokemonService } from '~/domains/pokemon/hooks';
-import { useStorePendingAction } from '~/shared/hooks';
+import { useNotificationDispatcher } from '~/events';
 import { NavLink } from '~/shared/components/NavigationLoader';
-import { useTrainer } from '~/state/trainer';
+import { useStorePendingAction } from '~/shared/hooks';
 import { useViewTransition } from '~/state';
+import { useTrainer } from '~/state/trainer';
 import { mergeclasses } from '~/utils';
 import classes from './PokemonCard.module.css';
 import { PokemonCardProvider } from './state/card-provider';
@@ -47,13 +47,7 @@ function CardImage() {
     <NavLink href={`/pokemon/${name}`} onClick={() => prepareViewTransition(String(id))}>
       <MantineCard.Section className={classes.imageSection}>
         <ViewTransition name={getViewTransitionName(String(id))}>
-          <Image
-            src={image}
-            alt={name}
-            width={200}
-            height={200}
-            className={classes.image}
-          />
+          <Image src={image} alt={name} width={200} height={200} className={classes.image} />
         </ViewTransition>
       </MantineCard.Section>
     </NavLink>
@@ -132,7 +126,11 @@ function CardFavorite() {
   };
 
   return (
-    <Tooltip label={trainerName ? (isFavorite ? 'Unfavorite' : 'Favorite') : 'Set trainer name to favorite'}>
+    <Tooltip
+      label={
+        trainerName ? (isFavorite ? 'Unfavorite' : 'Favorite') : 'Set trainer name to favorite'
+      }
+    >
       <ActionIcon
         variant="subtle"
         color={isFavorite ? 'red' : 'gray'}

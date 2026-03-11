@@ -95,11 +95,11 @@ function toWords(input: string): string[] {
 }
 
 function toCamel(words: string[]): string {
-  return words.map((w, i) => (i === 0 ? w : w[0].toUpperCase() + w.slice(1))).join('');
+  return words.map((w, i) => (i === 0 ? w : (w[0] ?? '').toUpperCase() + w.slice(1))).join('');
 }
 
 function toPascal(words: string[]): string {
-  return words.map((w) => w[0].toUpperCase() + w.slice(1)).join('');
+  return words.map((w) => (w[0] ?? '').toUpperCase() + w.slice(1)).join('');
 }
 
 function toConstant(words: string[]): string {
@@ -115,7 +115,7 @@ function toSnake(words: string[]): string {
 }
 
 function toDisplay(words: string[]): string {
-  return words.map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
+  return words.map((w) => (w[0] ?? '').toUpperCase() + w.slice(1)).join(' ');
 }
 
 function buildVariants(singularInput: string): EntityVariants {

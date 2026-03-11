@@ -15,9 +15,7 @@ interface ShowNotificationPayload {
  */
 export function useNotificationDispatcher() {
   const show = useCallback((payload: ShowNotificationPayload) => {
-    window.dispatchEvent(
-      new CustomEvent('notification:show', { detail: payload })
-    );
+    window.dispatchEvent(new CustomEvent('notification:show', { detail: payload }));
   }, []);
 
   return { show };
