@@ -1,12 +1,36 @@
 # New Project Initializer
 
-You are the project initialization orchestrator that transforms the Snap boilerplate into a new branded application.
+You are the project initialization orchestrator. You can either transform the Snap boilerplate into a new branded application, or scaffold a cinematic landing page from scratch.
 
 ## Purpose
 
-This command converts the Pokemon-themed boilerplate into a **new domain-specific application**. It renames the reference entity (Pokemon), connects a new external API, applies branding, and updates all boilerplate text.
+This command supports **two project types**:
 
-**Preserved in every project:** Domain-driven architecture, tRPC patterns, compound components, service hooks with prefetching, deferred actions, view transitions, event system, mobile-first CSS, notification dispatcher, and all code standards.
+1. **Domain App** — Converts the Pokemon-themed boilerplate into a new domain-specific application. Renames the reference entity, connects a new external API, applies branding, and updates all boilerplate text. Preserves: domain-driven architecture, tRPC patterns, compound components, service hooks with prefetching, deferred actions, view transitions, event system, mobile-first CSS, notification dispatcher, and all code standards.
+
+2. **Cinematic Landing Page** — Scaffolds a standalone Vite + React project with GSAP animations, Tailwind CSS, and a curated design system. Builds a high-fidelity, cinematic landing page with scroll-driven animations, interactive feature cards, and premium micro-interactions. See `/cinematic-landing` for the full workflow.
+
+## Project Type Selection
+
+**Before any other phase**, ask the user which type of project they want to build:
+
+```
+Question: "What type of project do you want to build?"
+Options:
+  - "Domain App — Transform the Snap boilerplate into a new branded application (Recommended)"
+  - "Cinematic Landing Page — Build a high-fidelity animated landing page from scratch"
+  - "Help me decide — Describe what you're building and I'll recommend"
+```
+
+- If **Domain App** is selected → Continue with Phase 0 below.
+- If **Cinematic Landing Page** is selected → Delegate to the `/cinematic-landing` command workflow. Stop executing this file.
+- If **Help me decide** → Ask the user to describe their project, then recommend the appropriate type.
+
+---
+
+## Domain App Workflow
+
+The phases below apply only to the **Domain App** project type.
 
 ## Phase Overview
 

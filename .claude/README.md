@@ -33,7 +33,8 @@ This directory contains Claude Code customizations:
 
 | Command | Purpose | When to Use |
 |---------|---------|-------------|
-| `/new-project` | Transform boilerplate into a new branded app | Starting a new project from this template |
+| `/new-project` | Initialize a new project (domain app or cinematic landing) | Starting a new project from this template |
+| `/cinematic-landing` | Build a cinematic animated landing page from scratch | Standalone landing pages with GSAP, Tailwind, premium design |
 | `/workflow-project` | Full feature development workflow | New features, significant changes |
 | `/plan-tasks-project` | Break down a feature into subtasks | Planning phase only |
 
@@ -103,7 +104,9 @@ Transforms the Pokemon-themed boilerplate into a new domain-specific application
 
 ```mermaid
 flowchart TD
-    Start(["/new-project"]) --> P0
+    Start(["/new-project"]) --> TypeSelect{Project Type?}
+    TypeSelect -->|"Domain App"| P0
+    TypeSelect -->|"Cinematic Landing"| CL(["/cinematic-landing"])
 
     subgraph Planning ["Planning Phases (interactive)"]
         direction TB
@@ -152,6 +155,31 @@ flowchart TD
         P8 --> Done([Complete])
     end
 ```
+
+### `/cinematic-landing` — Cinematic Landing Page Builder
+
+Builds a high-fidelity, cinematic landing page from scratch. Also accessible via `/new-project` → "Cinematic Landing Page".
+
+1. **Discovery** — Brand name, aesthetic preset, value props, CTA (all in one question)
+2. **Design Token Mapping** — Maps preset to palette, fonts, image mood
+3. **Scaffold** — `npm create vite@latest` + React 19, Tailwind CSS, GSAP 3
+4. **Build** — All 7 sections: Navbar, Hero, Features, Philosophy, Protocol, Pricing, Footer
+
+**Aesthetic Presets:**
+
+| Preset | Identity | Vibe |
+|--------|----------|------|
+| A — Organic Tech | Clinical boutique | Research lab meets luxury magazine |
+| B — Midnight Luxe | Dark editorial | Members' club meets watchmaker atelier |
+| C — Brutalist Signal | Raw precision | Control room, pure information density |
+| D — Vapor Clinic | Neon biotech | Genome lab inside a Tokyo nightclub |
+
+**Key Features:**
+- GSAP ScrollTrigger animations with sticky stacking cards
+- Interactive feature cards (shuffler, typewriter, cursor scheduler)
+- Noise overlay, magnetic buttons, split-text reveals
+- Real Unsplash images matched to preset mood
+- Fully responsive, mobile-first
 
 ### `/plan-tasks-project` — Task Planning
 
@@ -221,7 +249,8 @@ Use frontend-patterns to check the new component
 .claude/
 ├── README.md
 ├── commands/
-│   ├── new-project.md            # Initialize new project from boilerplate
+│   ├── new-project.md            # Initialize new project (domain app or cinematic landing)
+│   ├── cinematic-landing.md      # Cinematic landing page builder
 │   ├── workflow-project.md       # Full feature workflow
 │   └── plan-tasks-project.md     # Task planning
 ├── skills/
