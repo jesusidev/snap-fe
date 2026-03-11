@@ -18,9 +18,5 @@ export function ViewTransitionProvider({ children }: { children: ReactNode }) {
     [activeTransition, setActiveTransition]
   );
 
-  return (
-    <ViewTransitionContext.Provider value={value}>
-      {children}
-    </ViewTransitionContext.Provider>
-  );
+  return <ViewTransitionContext.Provider value={value}>{children}</ViewTransitionContext.Provider>;
 }

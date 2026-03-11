@@ -22,6 +22,7 @@ Developer documentation for the Snap boilerplate — a minimal Next.js 16 app wi
 - **Smooth Scroll:** Lenis
 - **Linting:** Biome
 - **Validation:** Zod v4
+- **Toolchain:** Volta (pinned Node 24 LTS + npm 11)
 
 ## Commands
 

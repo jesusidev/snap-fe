@@ -18,14 +18,7 @@ export function PokemonCardProvider({
   types = [],
   children,
 }: PokemonCardProviderProps) {
-  const value = useMemo(
-    () => ({ id, name, image, types }),
-    [id, name, image, types]
-  );
+  const value = useMemo(() => ({ id, name, image, types }), [id, name, image, types]);
 
-  return (
-    <PokemonCardContext.Provider value={value}>
-      {children}
-    </PokemonCardContext.Provider>
-  );
+  return <PokemonCardContext.Provider value={value}>{children}</PokemonCardContext.Provider>;
 }

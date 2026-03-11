@@ -58,7 +58,11 @@ function ColorSchemeToggle() {
       onClick={() => setColorScheme(computedColorScheme === 'dark' ? 'light' : 'dark')}
     >
       {mounted ? (
-        computedColorScheme === 'dark' ? <IconSun size={18} /> : <IconMoon size={18} />
+        computedColorScheme === 'dark' ? (
+          <IconSun size={18} />
+        ) : (
+          <IconMoon size={18} />
+        )
       ) : (
         <IconSun size={18} />
       )}
@@ -82,10 +86,14 @@ export default function LayoutPage({ children }: LayoutPageProps) {
             </NavLink>
             <Group gap="md">
               <NavLink href="/" className={styles.navLink}>
-                <Text size="sm" fw={500}>Home</Text>
+                <Text size="sm" fw={500}>
+                  Home
+                </Text>
               </NavLink>
               <NavLink href="/pokemon" className={styles.navLink}>
-                <Text size="sm" fw={500}>Pokedex</Text>
+                <Text size="sm" fw={500}>
+                  Pokedex
+                </Text>
               </NavLink>
               <TrainerBadge />
               <ColorSchemeToggle />

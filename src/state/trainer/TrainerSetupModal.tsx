@@ -23,16 +23,11 @@ export function TrainerSetupModal() {
   };
 
   return (
-    <Modal
-      opened={isSetupOpen}
-      onClose={closeSetup}
-      title="Set Your Trainer Name"
-      centered
-    >
+    <Modal opened={isSetupOpen} onClose={closeSetup} title="Set Your Trainer Name" centered>
       <Stack gap="md">
         <Text size="sm" c="dimmed">
-          Set your trainer name to favorite and compare Pokemon.
-          Your pending action will be executed automatically.
+          Set your trainer name to favorite and compare Pokemon. Your pending action will be
+          executed automatically.
         </Text>
         <TextInput
           label="Trainer Name"

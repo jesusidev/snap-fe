@@ -196,6 +196,7 @@ Skills provide Claude with project-specific knowledge. They trigger automaticall
 | **Hydration** | Defer client-only values to `useEffect` or `mounted` guard |
 | **Smooth scroll** | `useLenis` / `LenisConfig` from `~/state`, `data-lenis-prevent` to opt out |
 | **Network monitor** | `NetworkStatusMonitor` in providers — auto-detects offline/slow and dispatches notifications |
+| **Toolchain** | Volta pins Node/npm versions in `package.json` — no manual version management needed |
 
 ## Agents
 

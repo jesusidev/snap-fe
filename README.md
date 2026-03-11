@@ -2,6 +2,16 @@
 
 A minimal Next.js 16 boilerplate showcasing production frontend patterns without the backend complexity. No database, no auth — just clean architecture you can clone and build on. Uses the [PokeAPI](https://pokeapi.co/docs/v2) as a demo data source.
 
+## Prerequisites
+
+This project uses [Volta](https://volta.sh/) to pin Node.js and npm versions. Install Volta, then it automatically manages the correct versions:
+
+```bash
+curl https://get.volta.sh | bash
+```
+
+Node 24 (LTS) and npm 11 are pinned in `package.json` — Volta handles the rest.
+
 ## Quick Start
 
 ```bash
@@ -172,6 +182,7 @@ All env vars validated at build time via Zod + `@t3-oss/env-nextjs`. Use `env.VA
 | Validation | Zod v4 |
 | UI | Mantine 8 |
 | Linting | Biome |
+| Toolchain | Volta (pinned Node 24 LTS + npm 11) |
 
 ---
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { type ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { TrainerContext } from './trainer-context';
 
 const STORAGE_KEY = 'trainer_name';

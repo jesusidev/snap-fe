@@ -76,10 +76,7 @@ export function usePokemonService() {
     const utils = api.useUtils();
 
     return (name: string) => {
-      void utils.pokemon.byName.prefetch(
-        { name },
-        { staleTime: 1000 * 60 * 30 }
-      );
+      void utils.pokemon.byName.prefetch({ name }, { staleTime: 1000 * 60 * 30 });
     };
   }
 

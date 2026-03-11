@@ -8,6 +8,14 @@
 
 ### Development Environment
 
+This project uses [Volta](https://volta.sh/) to pin Node.js and npm versions. Install Volta, then it automatically manages the correct versions:
+
+```bash
+curl https://get.volta.sh | bash
+```
+
+Node 24 (LTS) and npm 11 are pinned in `package.json` — Volta handles the rest.
+
 ```bash
 npm install
 npm run dev          # Start dev server at http://localhost:3000 (Turbopack)

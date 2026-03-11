@@ -510,6 +510,19 @@ To add a new env var:
 
 ## 11. Tooling
 
+### Volta
+
+[Volta](https://volta.sh/) pins Node.js and npm versions in `package.json`. When you `cd` into the project, Volta automatically switches to the correct versions — no manual `nvm use` needed.
+
+```bash
+# Install Volta (one-time)
+curl https://get.volta.sh | bash
+
+# Versions are pinned — Volta handles the rest
+node --version  # 24.14.0
+npm --version   # 11.11.0
+```
+
 ### React Compiler
 
 Enabled in `next.config.mjs`. Automatically memoizes components and hooks — you generally don't need manual `useMemo`/`useCallback` for render optimization. Still use them when:
